@@ -56,8 +56,8 @@ class LaporanLabaRugi extends Controller
                     "id" => $result->id,
                     "nama_barang" => $result->nama_barang,
                     "keuntungan" => (double)$result->keuntungan,
-                    "stokTerjual" => (int)$getStok->stok,
-                    "stokTersedia" => (int)$getStokTerjual
+                    "stokTerjual" => (int)$getStokTerjual,
+                    "stokTersedia" => (int)$getStok->stok
                 ];
             }
             return $this->respondSuccess($dataArray);

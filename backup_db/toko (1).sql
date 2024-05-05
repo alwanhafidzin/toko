@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2024 at 02:46 PM
+-- Generation Time: May 05, 2024 at 11:46 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -43,9 +43,11 @@ CREATE TABLE `barang` (
 --
 
 INSERT INTO `barang` (`id`, `nama_barang`, `keterangan`, `harga_jual`, `id_pengguna`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Baju 1', 'baju ori', 100000, 1, NULL, '2024-05-05 00:50:33', '2024-05-05 00:50:33'),
+(1, 'Erigo Tsirt', 'baju nyaman dipakai', 100000, 1, '2024-05-05 14:17:10', '2024-05-05 00:50:33', '2024-05-05 14:17:10'),
 (2, 'Baju 2', 'baju ori', 100000, 1, '2024-05-05 01:05:33', '2024-05-05 00:51:26', '2024-05-05 01:05:33'),
-(3, 'Baju 3', 'baju ori', 100000, 1, '2024-05-05 01:05:30', '2024-05-05 00:52:45', '2024-05-05 01:05:30');
+(3, 'Baju 3', 'baju ori', 100000, 1, '2024-05-05 01:05:30', '2024-05-05 00:52:45', '2024-05-05 01:05:30'),
+(4, 'Baju Edit', 'baru', 90000, 1, NULL, '2024-05-05 14:14:28', '2024-05-05 14:15:58'),
+(5, 'Baju 2', 'baru', 100000, 1, NULL, '2024-05-05 14:23:21', '2024-05-05 14:23:21');
 
 -- --------------------------------------------------------
 
@@ -137,6 +139,14 @@ CREATE TABLE `pembelian` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `pembelian`
+--
+
+INSERT INTO `pembelian` (`id`, `jumlah_pembelian`, `harga_beli`, `id_barang`, `id_pengguna`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 10, 90000, 1, 1, '2024-05-05 21:28:16', '2024-05-05 10:00:54', '2024-05-05 10:00:54'),
+(2, 10, 90000, 5, 1, NULL, '2024-05-05 14:24:19', '2024-05-05 14:24:19');
+
 -- --------------------------------------------------------
 
 --
@@ -153,6 +163,15 @@ CREATE TABLE `penjualan` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `penjualan`
+--
+
+INSERT INTO `penjualan` (`id`, `jumlah_penjualan`, `harga_jual`, `id_barang`, `id_pengguna`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 100000, 1, 1, '2024-05-05 21:28:55', '2024-05-05 10:57:53', '2024-05-05 10:57:53'),
+(2, 2, 100000, 5, 1, NULL, '2024-05-05 14:29:39', '2024-05-05 14:29:39'),
+(3, 5, 100000, 5, 1, NULL, '2024-05-05 14:31:42', '2024-05-05 14:31:42');
 
 -- --------------------------------------------------------
 
@@ -273,7 +292,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -291,13 +310,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `penjualan`
 --
 ALTER TABLE `penjualan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
