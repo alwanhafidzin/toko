@@ -15,4 +15,6 @@ How To Run :
 1.run composer install 
 2.run npm install
 3.open terminal and run laravel (php artisan serve)
-4.open new terminal and run node apps (npm run dev start)
+4.open new terminal and run node apps (npm run dev)
+
+Database ada di folder backup_db.login dengan email :admin@gmail.com password:admin
