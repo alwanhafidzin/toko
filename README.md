@@ -1,5 +1,5 @@
 # Aplikasi toko dengan framework laravel :
-# Anggota Kelompok:
+ Anggota Kelompok:
 1. Alwan Hafidzin F (2702440190)
 2. Diandra Rachel S (2602291720)
 3. Dinar Arisandy (2602289754)
