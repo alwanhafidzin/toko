@@ -3,27 +3,21 @@
 @section('content')
     <div class="card">
     <div class="card-header">
-        <h3 class="card-title"><span style="color:rgb(6, 6, 6);font-weight:bold">Data Pembelian</h3>
+        <h3 class="card-title"><span style="color:rgb(6, 6, 6);font-weight:bold">Data Laporan Laba Rugi</h3>
     </div>
 
     <!-- /.card-header -->
     <div class="card-body">
         {{-- <div class="card-header"> --}}
-        <div class="card-tools">
-        <a class="btn btn-success" style="margin-bottom: 10px;" data-bs-toggle="modal" data-bs-target="#createModal">Tambah Data <i class="fas fa-plus-square"></i></a>
-            
-            {{-- </div> --}}
 
             <table id="datatable" class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>No.</th>
                         <th>Nama Produk</th>
-                        <th>Tanggal Pembelian</th>
-                        <th>Jumlah Pembelian</th>
-                        <th>Harga Beli</th>
-                        <th>Total Harga Beli</th>
-                        <th>User</th>
+                        <th>Stok Tersedia</th>
+                        <th>Stok Terjual</th>
+                        <th>Keuntungan</th>
                     </tr>
                 </thead>
                 <tbody id="listData">
@@ -34,51 +28,6 @@
 
     </div>
     <!-- /.card -->
-
-    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="createModalLabel">Tambah Pembelian</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-             <form id="tambahPembelian" method="post">
-              @csrf
-                        <div class="card-body">
-                        <div class="form-group">
-                            <label>Pilih Produk</label>
-                            <select class="form-control select2" name="barang_add" id="barang_add" onchange="update_barang()" style="width: 100%;" required>
-                                <option value="">Pilih Produk</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="harga_beli">Harga Beli(Satuan)</label>
-                            <input type="number" name="harga_beli" class="form-control" oninput="update_total_harga_beli()" id="harga_beli" placeholder="Harga Beli">
-                        </div>
-                        <div class="form-group">
-                            <label for="jumlah_pembelian">Jumlah Pembelian</label>
-                            <input type="number" name="jumlah_pembelian" oninput="update_total_harga_beli()" class="form-control" id="jumlah_pembelian" placeholder="Jumlah Pembelian">
-                        </div>
-                        <div class="form-group">
-                            <label for="total_harga_beli">Total Harga Beli</label>
-                            <input type="number" name="total_harga_beli" class="form-control" id="total_harga_beli" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label for="total_stok">Total Stok</label>
-                            <input type="number" name="total_stok" class="form-control" id="total_stok" disabled>
-                        </div>
-                        <div class="modal-footer justify-content-between">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                          <button type="submit" name="submit" class="btn btn-primary">Simpan</button>
-                        </div>
-                   </form>
-            </div>
-         </div>
-        </form>
-  </div>
-</div>
-    </div>
    
 </div>
 

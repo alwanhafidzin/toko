@@ -93,12 +93,12 @@ class BarangController extends Controller
             
             DB::beginTransaction();
 
-            $satuan = new m_barang();
-            $satuan->nama_barang = $request->nama_barang;
-            $satuan->keterangan = $request->keterangan;
-            $satuan->harga_jual =  $request->harga_jual;
-            $satuan->id_pengguna = $request->user_id;
-            $satuan->save();
+            $barang = new m_barang();
+            $barang->nama_barang = $request->nama_barang;
+            $barang->keterangan = $request->keterangan;
+            $barang->harga_jual =  $request->harga_jual;
+            $barang->id_pengguna = $request->user_id;
+            $barang->save();
 
             DB::commit();
 
@@ -229,11 +229,17 @@ class BarangController extends Controller
             if($getData == null){
                 return $this->respondError(400, "Data tidak ditemukan");
             }
+            $stok= m_barang::select('barang.id AS id_barang', 'barang.nama_barang')
+            ->selectRaw('(SELECT COALESCE(SUM(p.jumlah_pembelian), 0) FROM pembelian p WHERE p.id_barang = barang.id) - 
+                         (SELECT COALESCE(SUM(p2.jumlah_penjualan), 0) FROM penjualan p2 WHERE p2.id_barang = barang.id) AS stok')
+            ->where('barang.id', $getData->id)
+            ->first();
             return $this->respondSuccess([
                 "id" => $getData->id,
                 "nama_barang" => $getData->nama_barang,
                 "keterangan" => $getData->keterangan,
                 "harga_jual" => $getData->harga_jual,
+                "stok" => $stok->stok
             ]);
         }catch(\Exception $ex){
             DB::rollBack();

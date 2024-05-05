@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
     <div class="card-header">
-        <h3 class="card-title"><span style="color:rgb(6, 6, 6);font-weight:bold">Data Pembelian</h3>
+        <h3 class="card-title"><span style="color:rgb(6, 6, 6);font-weight:bold">Data Penjualan</h3>
     </div>
 
     <!-- /.card-header -->
@@ -19,10 +19,10 @@
                     <tr>
                         <th>No.</th>
                         <th>Nama Produk</th>
-                        <th>Tanggal Pembelian</th>
-                        <th>Jumlah Pembelian</th>
-                        <th>Harga Beli</th>
-                        <th>Total Harga Beli</th>
+                        <th>Tanggal Penjualan</th>
+                        <th>Jumlah Penjualan</th>
+                        <th>Harga Jual</th>
+                        <th>Total Harga Jual</th>
                         <th>User</th>
                     </tr>
                 </thead>
@@ -39,11 +39,11 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createModalLabel">Tambah Pembelian</h5>
+                <h5 class="modal-title" id="createModalLabel">Tambah Penjualan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-             <form id="tambahPembelian" method="post">
+             <form id="tambahPenjualan" method="post">
               @csrf
                         <div class="card-body">
                         <div class="form-group">
@@ -53,16 +53,16 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="harga_beli">Harga Beli(Satuan)</label>
-                            <input type="number" name="harga_beli" class="form-control" oninput="update_total_harga_beli()" id="harga_beli" placeholder="Harga Beli">
+                            <label for="harga_jual">Harga Jual(Satuan)</label>
+                            <input type="number" name="harga_jual" class="form-control" oninput="update_total_harga_jual()" id="harga_jual" placeholder="Harga Jual" disabled>
                         </div>
                         <div class="form-group">
-                            <label for="jumlah_pembelian">Jumlah Pembelian</label>
-                            <input type="number" name="jumlah_pembelian" oninput="update_total_harga_beli()" class="form-control" id="jumlah_pembelian" placeholder="Jumlah Pembelian">
+                            <label for="jumlah_penjualan">Jumlah Penjualan</label>
+                            <input type="number" name="jumlah_penjualan" oninput="update_total_harga_jual()" class="form-control" id="jumlah_penjualan" placeholder="Jumlah Penjualan">
                         </div>
                         <div class="form-group">
-                            <label for="total_harga_beli">Total Harga Beli</label>
-                            <input type="number" name="total_harga_beli" class="form-control" id="total_harga_beli" disabled>
+                            <label for="total_harga_jual">Total Harga Jual</label>
+                            <input type="number" name="total_harga_jual" class="form-control" id="total_harga_jual" disabled>
                         </div>
                         <div class="form-group">
                             <label for="total_stok">Total Stok</label>

@@ -23,22 +23,22 @@ $(function () {
       barang_add: {
         required: true,
       },
-      harga_beli: {
+      harga_jual: {
         required: true,
       },
-      jumlah_pembelian: {
+      jumlah_penjualan: {
         required: true
       },
     },
-    messages: {
-      barang_add: {
+    barang_add: {
+      id_barang: {
         required: "Harap pilih produk"
       },
-      harga_beli: {
-        required: "Harap masukan harga beli"
+      harga_jual: {
+        required: "Harap masukan harga jual"
       },
-      jumlah_pembelian: {
-        required: "Harap masukan jumlah pembelian"
+      jumlah_penjualan: {
+        required: "Harap masukan jumlah penjualan"
       },
     },
     errorElement: 'span',
@@ -59,7 +59,7 @@ $(function () {
   function refresh_table() {
   $.ajax({
       type: 'GET',
-      url: "{{ route('pembelian/getAllData') }}",
+      url: "{{ route('penjualan/getAllData') }}",
       cache: false,
       //Ajax success function ketika tidak ada error.200 ok
       success: function(data) {
@@ -71,9 +71,9 @@ $(function () {
                               '<td>'+(i+1)+'</td>'+
                               '<td>'+result[i].nama_barang+'</td>'+
                               '<td>'+formatDateTime(result[i].created_at)+'</td>'+
-                              '<td>'+result[i].jumlah_pembelian+'</td>'+
-                              '<td>'+result[i].harga_beli+'</td>'+
-                              '<td>'+(result[i].jumlah_pembelian * result[i].harga_beli)+'</td>'+ 
+                              '<td>'+result[i].jumlah_penjualan+'</td>'+
+                              '<td>'+result[i].harga_jual+'</td>'+
+                              '<td>'+(result[i].jumlah_penjualan * result[i].harga_jual)+'</td>'+ 
                               '<td>'+result[i].user+'</td>'+ 
                           '</tr>';
               }
@@ -97,16 +97,16 @@ $(function () {
 
   var userId = "<?php echo auth()->user()->id; ?>";
 
-  $("#tambahPembelian").submit(function(e) {
+  $("#tambahPenjualan").submit(function(e) {
     e.preventDefault();
     ctx_modal = $("#createModal");
     let id_barang = $('#barang_add').val();
-    let harga_beli = $('#harga_beli').val();
-    let jumlah_pembelian = $('#jumlah_pembelian').val();
+    let harga_jual = $('#harga_jual').val();
+    let jumlah_penjualan = $('#jumlah_penjualan').val();
     form = $(this);
-    if(id_barang != "" && harga_beli != "" && jumlah_pembelian != ""){
+    if(id_barang != "" && harga_jual != "" && jumlah_penjualan != ""){
     $.ajax({
-    url: "{{ route('pembelian/create') }}",
+    url: "{{ route('penjualan/create') }}",
     type: 'POST',
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -114,8 +114,8 @@ $(function () {
     dataType: 'json',
     data:{
         id_barang: id_barang,
-        harga_beli: harga_beli,
-        jumlah_pembelian : jumlah_pembelian,
+        harga_jual: harga_jual,
+        jumlah_penjualan : jumlah_penjualan,
         user_id : userId
     },
     success: function(){ 
@@ -193,29 +193,34 @@ $(function () {
       })
       .done(function(data) {
         var result = data.data;
-        var jumlah_pembelian = parseFloat($("#jumlah_pembelian").val());
-        if (isNaN(jumlah_pembelian)) {
-            jumlah_pembelian = parseFloat(0);
+        var jumlah_penjualan = parseFloat($("#jumlah_penjualan").val());
+        if (isNaN(jumlah_penjualan)) {
+          jumlah_penjualan = parseFloat(0);
         }
-        $("#total_stok").val(parseFloat(result.stok)+jumlah_pembelian);
+        $("#harga_jual").val(parseFloat(result.harga_jual));
+        $("#total_stok").val(parseFloat(result.stok)-jumlah_penjualan);
         $stok_barang = parseFloat(result.stok);
       });
     }
 
-    function update_total_harga_beli() {
-      var jumlah_pembelian = parseFloat($("#jumlah_pembelian").val());
-      var harga_beli = parseFloat($("#harga_beli").val());
+    function update_total_harga_jual() {
+      var jumlah_penjualan = parseFloat($("#jumlah_penjualan").val());
+      var harga_jual = parseFloat($("#harga_jual").val());
 
-      if (isNaN(jumlah_pembelian)) {
-          jumlah_pembelian = 0;
+      if (isNaN(jumlah_penjualan)) {
+        jumlah_penjualan = 0;
       }
-      if (isNaN(harga_beli)) {
-          harga_beli = 0;
+      if (isNaN(harga_jual)) {
+        harga_jual = 0;
       }
-      var total_harga_beli = jumlah_pembelian * harga_beli;
-      $("#total_harga_beli").val(total_harga_beli);
-      var total_stok_baru = jumlah_pembelian + total_stok;
-      $("#total_stok").val(parseInt($stok_barang+jumlah_pembelian));
+      var total_harga_jual = jumlah_penjualan * harga_jual;
+      if(($stok_barang - jumlah_penjualan) < 0 ){
+        swal("Warning!", "Stok tersedia tidak cukup.", "warning");
+        $("#jumlah_penjualan").val($stok_barang);
+      }else{
+        $("#total_harga_jual").val(total_harga_jual);
+        $("#total_stok").val(parseInt($stok_barang-jumlah_penjualan));
+      }
     }
 
     function formatDateTime(originalDateTime) {

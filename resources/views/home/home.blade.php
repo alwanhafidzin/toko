@@ -10,7 +10,7 @@
               <div class="inner">
                 <h3 id ="stokProduk">0</h3>
 
-                <p>Total Stok Produk Terjual</p>
+                <p>Total Stok Produk Tersedia</p>
               </div>
               <div class="icon">
                 <i class="ion ion-bag"></i>

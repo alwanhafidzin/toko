@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\PembelianController;
+use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\LaporanLabaRugi;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +39,23 @@ Route::prefix("barang")->group(function() {
     Route::get('/detailById',[BarangController::class, 'getDataById'])->name('barang/detailById');
     Route::post('/edit',[BarangController::class, 'edit'])->name('barang/edit');
     Route::post('/delete',[BarangController::class, 'delete'])->name('barang/delete');
+});
 
+Route::prefix("pembelian")->group(function() {
+    Route::get('/',[PembelianController::class, 'index'])->name('pembelian');
+    Route::get('/getAllData',[PembelianController::class, 'getAllData'])->name('pembelian/getAllData');
+    Route::post('/create',[PembelianController::class, 'create'])->name('pembelian/create');
+});
+
+Route::prefix("penjualan")->group(function() {
+    Route::get('/',[PenjualanController::class, 'index'])->name('penjualan');
+    Route::get('/getAllData',[PenjualanController::class, 'getAllData'])->name('penjualan/getAllData');
+    Route::post('/create',[PenjualanController::class, 'create'])->name('penjualan/create');
+});
+
+Route::prefix("laporan")->group(function() {
+    Route::get('/',[LaporanLabaRugi::class, 'index'])->name('laporan');
+    Route::get('/getAllData',[LaporanLabaRugi::class, 'getAllData'])->name('laporan/getAllData');
 });
 
 Auth::routes();
