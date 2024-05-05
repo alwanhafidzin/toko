@@ -17,4 +17,4 @@ How To Run :
 3.open terminal and run laravel (php artisan serve)
 4.open new terminal and run node apps (npm run dev start)
 
-Database ada di folder backup_db
+Database ada di folder backup_db.login dengan email :admin@gmail.com password:admin
